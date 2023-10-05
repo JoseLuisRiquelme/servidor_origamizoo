@@ -1,0 +1,37 @@
+//dependencias
+
+npm init -y
+
+express
+
+nodemon
+
+pg
+
+dotenv
+
+cors
+
+jsonwebtoken
+
+bcryptjs
+
+//base de datos
+
+CREATE DATABASE origamiDB;
+
+/c origamiDB
+
+CREATE TABLE usuarios(id SERIAL PRIMARY KEY,nombre VARCHAR(50), email VARCHAR(50), contrasena VARCHAR(250), direccion VARCHAR(250), ciudad VARCHAR(50), telefono INT, fecha_registro date);
+
+INSERT INTO usuarios VALUES (DEFAULT, 'usuario1', 'usuario1@email.com', 'pass1', 'direccion1', 'ciudad1', '09090909', '2023-07-21'), (DEFAULT, 'usuario2', 'usuario2@email.com', 'pass2', 'direccion2', 'ciudad2', '08080808', '2022-01-6');
+
+CREATE TABLE Publicaciones (id SERIAL PRIMARY KEY, id_usuario INT REFERENCES Usuarios(id),titulo VARCHAR(200),descripcion TEXT,stock INT,precio INT,fecha_publicacion TIMESTAMP,img VARCHAR(100));
+
+INSERT INTO publicaciones VALUES (DEFAULT, 1,'origami pokemon','Un Bulbasaur salvaje a aparecido',19,1990,'2022-11-16','https://imgbox.com/fosmgUgs'),(DEFAULT,2,'perro yoga','perro yoga negro',12,2580,'2021-07-15','https://imgbox.com/Z4gRAH8L');
+
+CREATE TABLE Comentarios (id SERIAL PRIMARY KEY,id_publicacion INT REFERENCES Publicaciones(id),id_usuario INT REFERENCES Usuarios(id),contenido TEXT,fecha DATE);
+
+INSERT INTO comentarios VALUES(DEFAULT, 1, 2, 'me encanta', '2021-07-15'), (DEFAULT, 2, 2, 'lo ame', '2023-02-02'), (DEFAULT, 1, 2, 'genial', '2023-04-11');
+
+INSERT INTO favoritos VALUES(DEFAULT, 7, 1);
